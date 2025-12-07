@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada - Rec Vendas Pro</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+
+    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
+
+    <style>
+        /* Estilos Exclusivos da 404 */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            background-color: var(--bg-body);
+            flex-direction: column;
+            transition: background-color 0.3s ease; /* Suavidade para Dark Mode */
+        }
+
+        .error-container {
+            background: var(--bg-card);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Borda superior colorida */
+        .error-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--primary);
+            opacity: 0.1;
+            margin-bottom: -40px;
+            user-select: none;
+        }
+        
+        /* Correção para o 404 aparecer no Modo Escuro */
+        body.dark-mode .error-code {
+            color: #ffffff !important; /* Força o branco */
+            opacity: 0.15 !important;  /* Aumentei para ficar mais visível */
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 { font-size: 2rem; color: var(--text-title); margin-bottom: 10px; }
+        p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
+
+        .redirect-counter {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-icon"><i class="fas fa-unlink"></i></div>
+        
+        <h1>Ops! Página não encontrada.</h1>
+        <p>O link que você acessou não existe mais. Mas não se preocupe: seus <strong>dados de clientes e O.S.</strong> continuam seguros no seu computador.</p>
+
+        <a href="./" class="btn btn-cta" style="display: inline-flex; align-items: center; justify-content: center;">
+            <i class="fas fa-home" style="margin-right: 8px;"></i> VOLTAR PARA O INÍCIO
+        </a>
+
+        <div class="redirect-counter">
+            Redirecionando automaticamente em <span id="countdown">10</span> segundos...
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+
+    <script>
+        // Lógica de Redirecionamento Automático
+        let seconds = 10;
+        const countdownEl = document.getElementById('countdown');
+        
+        const interval = setInterval(() => {
+            seconds--;
+            countdownEl.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = './'; // Redireciona para a raiz limpa
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>

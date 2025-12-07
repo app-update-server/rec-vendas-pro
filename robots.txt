@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Novo endereço do Sitemap no subdomínio oficial
+Sitemap: https://recvendas.textospropagandas.com.br/sitemap.xml

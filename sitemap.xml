@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/</loc>
+        <lastmod>2025-12-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/blog.html</loc>
+        <lastmod>2025-12-06</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/afiliados.html</loc>
+        <lastmod>2025-12-06</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/sobre.html</loc>
+        <lastmod>2025-12-06</lastmod>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/assets/posts/como-precificar-servicos-produtos.html</loc>
+        <lastmod>2025-12-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/assets/posts/excel-vs-sistema.html</loc>
+        <lastmod>2025-12-07</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/assets/posts/gestao-hibrida-loja-servicos.html</loc>
+        <lastmod>2025-12-07</lastmod>
+        <priority>0.8</priority>
+    </url>  
+
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/assets/posts/gestao-os-assistencia.html</loc>
+        <lastmod>2025-12-07</lastmod>
+        <priority>0.8</priority>
+    </url>   
+
+    <url>
+        <loc>https://recvendas.textospropagandas.com.br/assets/posts/rec-vendas-5-hub.html</loc>
+        <lastmod>2025-12-07</lastmod>
+        <priority>0.8</priority>
+    </url>         
+
+</urlset>
