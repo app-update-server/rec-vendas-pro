@@ -1,0 +1,2286 @@
+/* --- 1. RESET E VARIÁVEIS GERAIS --- */
+:root {
+    /* Cores da Marca (Atualizadas) */
+    --primary: #1879e8;        /* Novo Azul Oficial Júpiter */
+    --primary-hover: #1360ba;  /* Azul mais escuro ajustado para Hover */
+    --accent: #f97316;         /* Laranja (Mantido) */
+    
+    /* Cores do Modo Claro (Light Mode) */
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-header: #ffffff;
+    --text-main: #334155;
+    --text-title: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --hero-bg: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+    --cause-bg: #fff7ed;
+    --cause-border: #ffedd5;
+    --faq-bg: #f8fafc;
+}
+
+/* Cores do Modo Escuro (Dark Mode) */
+body.dark-mode {
+    --bg-body: #0f172a;       /* Fundo Geral Escuro */
+    --bg-card: #1e293b;       /* Fundo dos Cards */
+    --bg-header: #0f172a;     /* Fundo do Menu */
+    --text-main: #cbd5e1;     /* Texto Principal Claro */
+    --text-title: #f8fafc;    /* Títulos Brancos */
+    --text-muted: #94a3b8;    /* Texto Secundário */
+    --border: #334155;        /* Bordas Escuras */
+    --hero-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    --cause-bg: #1e293b;
+    --cause-border: #334155;
+    --faq-bg: #1e293b;
+}
+
+/* Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    /* Transição suave para o Dark Mode */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+body {
+    color: var(--text-main);
+    line-height: 1.6;
+    background-color: var(--bg-body);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+img {
+    height: auto !important; 
+}
+
+/* --- 2. UTILITÁRIOS --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.text-center { text-align: center; }
+.highlight { color: var(--accent); }
+
+/* --- 3. BOTÕES --- */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+/* Botão Laranja (CTA) */
+.btn-cta {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+    font-size: 1.1rem;
+}
+.btn-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(249, 115, 22, 0.5);
+    background-color: #ea580c;
+}
+
+/* Botão Azul (Primário) */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border-bottom: 4px solid #1e40af;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background-color: var(--primary-hover);
+}
+
+.badge {
+    background: #eff6ff;
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 15px;
+    border: 1px solid #bfdbfe;
+}
+body.dark-mode .badge {
+    background: #1e3a8a;
+    color: #bfdbfe;
+    border-color: #2563eb;
+}
+
+/* --- 4. HEADER E MENU DE NAVEGAÇÃO --- */
+header {
+    background: var(--bg-header);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-title);
+    text-decoration: none;
+    z-index: 1002; /* Fica acima do menu mobile aberto */
+}
+.logo span { color: var(--primary); }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- Correção do Link 'Voltar ao Site' --- */
+.back-link {
+    text-decoration: none;
+    color: var(--primary); /* Cor padrão (Azul) */
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-right: 15px; /* Espaço para não grudar no botão de tema */
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Quando o Dark Mode estiver ativo: */
+body.dark-mode .back-link {
+    color: var(--text-main); /* Muda para cor clara */
+}
+
+body.dark-mode .back-link:hover {
+    color: var(--primary); /* Azul no hover */
+}
+
+/* Estilo da Imagem da Logo (Otimizado para PageSpeed) */
+.logo-img {
+    width: auto !important;      /* Obedece a largura do HTML */
+    height: auto !important;     /* Obedece a proporção (Sem distorção) */
+    max-height: 40px;            /* Limite visual Desktop */
+    display: block;
+}
+
+/* Ajuste de Segurança para Celular (Mobile) */
+@media(max-width: 480px) {
+    .logo-img {
+        max-height: 32px;        /* Limite visual Mobile (menor) */
+        max-width: 180px;        /* Trava de segurança */
+    }
+    
+    /* Ajuste fino no espaçamento do cabeçalho mobile */
+    nav { gap: 10px; }
+}
+
+/* Menu Desktop */
+.menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+.menu a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+.menu a:hover { color: var(--primary); }
+
+/* Botões de Ação no Header */
+.theme-btn, .mobile-menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-title);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+.theme-btn:hover { color: var(--primary); }
+
+/* Esconde o botão hambúrguer no Desktop */
+.mobile-menu-btn { display: none; z-index: 1002; }
+
+/* --- 5. RESPONSIVIDADE DO MENU (MOBILE) --- */
+@media(max-width: 768px) {
+    .mobile-menu-btn { display: flex; }
+    
+    .nav-right { gap: 10px; }
+
+    /* Transforma o menu em uma gaveta de tela cheia */
+    .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0; /* Fechado por padrão */
+        background: var(--bg-card);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+        z-index: 1001;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Classe que o JS adiciona para abrir */
+    .menu.open { height: 100vh; }
+    
+    .menu a { font-size: 1.5rem; }
+}
+
+/* --- 6. HERO SECTION (TOPO) --- */
+.hero {
+    padding: 140px 0 80px;
+    background: var(--hero-bg);
+    text-align: center;
+}
+.hero h1 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--text-title);
+}
+.hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+/* --- 7. CAUSA SOCIAL --- */
+.cause-section {
+    background: var(--cause-bg);
+    padding: 60px 0;
+    border-top: 1px solid var(--cause-border);
+    border-bottom: 1px solid var(--cause-border);
+}
+.cause-box {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.cause-content h2 {
+    color: var(--accent);
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+.cause-icon {
+    font-size: 4rem;
+    background: var(--bg-card);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2);
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+/* --- 8. RECURSOS (GRID) --- */
+.features { padding: 80px 0; }
+.features h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 60px;
+    color: var(--text-title);
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.feature-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s;
+    text-align: center;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    color: var(--primary);
+}
+.feature-card h3 {
+    margin-bottom: 10px;
+    color: var(--text-title);
+}
+
+/* --- 09. Screenshot (Abas) --- */
+.screenshots-section {
+    background-color: var(--bg-body);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+/* --- 10. Seção Preço --- */
+.price-section {
+    background: #0f172a; 
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+.price-card {
+    background: white;
+    color: #334155;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 20px;
+    position: relative;
+}
+body.dark-mode .price-card {
+    background: #1e293b;
+    color: #cbd5e1;
+}
+.price-tag {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.price-tag span {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    white-space: nowrap;
+}
+.old-price {
+    text-decoration: line-through;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+/* --- 10. FAQ (PERGUNTAS) --- */
+.faq { padding: 80px 0; max-width: 800px; margin: 0 auto; }
+.faq h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: var(--text-title);
+}
+details {
+    background: var(--faq-bg);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+}
+summary {
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-title);
+}
+summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+details[open] summary::after { content: '-'; }
+details p {
+    margin-top: 15px;
+    color: var(--text-muted);
+}
+
+/* --- 11. RODAPÉ ELITE (HÍBRIDO) --- */
+footer {
+    background-color: var(--bg-card);
+    padding: 80px 0 30px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Grid Responsivo (4 Colunas) */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+/* Elementos Internos */
+.footer-col h4 {
+    color: var(--text-title);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.footer-logo .logo-img {
+    height: 35px; /* Ajuste visual da logo no rodapé */
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.footer-desc {
+    margin: 10px 0 20px;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+/* Links (Lista Limpa) */
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    display: inline-block;
+}
+.footer-links a:hover {
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+/* Redes Sociais */
+.social-links { display: flex; gap: 10px; }
+.social-links a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--bg-body);
+    color: var(--text-main);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.social-links a:hover {
+    background: var(--primary); color: white; border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* --- CORREÇÃO DE FORMULÁRIO RESPONSIVO (NEWSLETTER & LEAD MAGNET) --- */
+
+/* Container do Formulário */
+.footer-form {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* O Grupo de Input + Botão */
+.footer-form .input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: stretch; /* Garante que tenham a mesma altura */
+}
+
+/* O Campo de Texto */
+.footer-form input {
+    flex: 1; /* Ocupa todo o espaço disponível */
+    padding: 12px 15px; /* Aumentei para toque fácil */
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    min-width: 0; /* Evita estouro em flexbox */
+}
+
+/* O Botão de Enviar */
+.btn-footer {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    white-space: nowrap; /* Impede que o texto quebre (ex: PEGAR CUPOM) */
+    font-size: 0.9rem;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-footer:hover {
+    background: var(--primary-hover);
+}
+
+/* AJUSTE CRÍTICO PARA MOBILE (CORRIGE O BOTÃO CORTADO) */
+@media (max-width: 480px) {
+    /* Força quebra de linha em telas pequenas */
+    .footer-form .input-group {
+        flex-direction: column; /* Um embaixo do outro */
+        gap: 12px; /* Espaço entre input e botão */
+    }
+
+    .footer-form input {
+        width: 100%; /* Largura total */
+        text-align: center; /* Digitação centralizada fica elegante no mobile */
+    }
+
+    .btn-footer {
+        width: 100%; /* Botão largura total */
+        padding: 14px 0; /* Mais alto para dedo gordo */
+        font-size: 1rem; /* Texto maior */
+    }
+}
+
+/* --- ESTILO GARANTIDO DO LEAD BOX (CUPOM NO MEIO DO POST) --- */
+.lead-box-pro {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    border: 2px dashed var(--primary);
+    border-radius: 16px;
+    padding: 30px 20px; /* Padding lateral menor para não espremer conteúdo */
+    margin: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Sombra suave */
+}
+
+/* Garante leitura no Dark Mode */
+body.dark-mode .lead-box-pro {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Ícone flutuante */
+.lead-box-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: block;
+    animation: floatIcon 3s infinite ease-in-out;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.lead-box-title {
+    color: var(--text-title);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.lead-box-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Centraliza o formulário dentro do box */
+.lead-box-pro .footer-form {
+    max-width: 400px; /* Largura controlada */
+    margin: 0 auto;
+}
+
+/* Divisória e Rodapé Inferior */
+.footer-divider {
+    height: 1px; background: var(--border);
+    margin-bottom: 30px; opacity: 0.5;
+}
+.footer-bottom {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center; gap: 10px;
+    font-size: 0.85rem;
+}
+
+/* --- INTELIGÊNCIA HÍBRIDA --- */
+/* Quando a página for "Home" (.page-home), escondemos navegação e newsletter */
+body.page-home .footer-col:nth-child(2), /* Coluna Links */
+body.page-home .footer-col:nth-child(4) { /* Coluna News */
+    display: none;
+}
+/* Na Home, centralizamos o que sobrou (Marca e Legal) */
+body.page-home .footer-grid {
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px)); /* Colunas mais largas */
+}
+
+/* RESPONSIVIDADE DO FOOTER */
+@media (max-width: 768px) {
+    footer { padding: 50px 0 30px; }
+    
+    /* Transforma o grid em 2 colunas fixas no mobile */
+    .footer-grid { 
+        grid-template-columns: 1fr 1fr; 
+        gap: 30px 10px; /* Mais espaço vertical, menos horizontal */
+        text-align: left; /* Mantém alinhamento à esquerda para leitura fácil */
+    }
+
+    /* Coluna 1 (Marca) ocupa as 2 colunas (Largura Total) */
+    .footer-col:nth-child(1) {
+        grid-column: span 2;
+        text-align: center; /* A marca fica bonita centralizada */
+    }
+
+    /* Coluna 4 (Newsletter) também ocupa largura total */
+    .footer-col:nth-child(4) {
+        grid-column: span 2;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Ajustes visuais mobile */
+    .footer-desc { margin: 15px auto; max-width: 100%; }
+    .social-links { justify-content: center; }
+    
+    /* Força os links a ficarem alinhados no grid compacto */
+    .footer-links { padding-left: 10px; }
+}
+
+/* --- 12. BOTÃO VOLTAR AO TOPO --- */
+#backToTop {
+    display: none; /* Invisível por padrão */
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999;
+    border: none;
+    outline: none;
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: opacity 0.4s, transform 0.3s;
+    opacity: 0;
+}
+#backToTop:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-5px);
+}
+#backToTop.visible {
+    display: block;
+    opacity: 1;
+}
+
+/* --- 13. AJUSTES FINAIS DE RESPONSIVIDADE --- */
+@media(max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .cause-box { flex-direction: column; text-align: center; gap: 20px; }
+    .price-card { padding: 30px 20px; }
+    .price-tag { font-size: 3rem; }
+}
+
+/* --- OTIMIZAÇÃO DA IMAGEM HERO (LCP & CLS) --- */
+.hero img {
+    width: 100%;            /* Ocupa a largura do container */
+    max-width: 900px;       /* Limite para não estourar em telas grandes */
+    height: auto;           /* Altura proporcional */
+    display: block;
+    margin: 0 auto;         /* Centraliza */
+    
+    /* ELITE FIX: Reserva o espaço exato (Proporção 3:2) */
+    /* Isso impede que o layout "pule" e mata o CLS do PageSpeed */
+    aspect-ratio: 1200 / 800; 
+    
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border: 1px solid #e2e8f0;
+}
+
+/* Reset do Container da Imagem (Mantido para segurança) */
+.hero > .container > div { 
+    box-shadow: none !important; 
+    border: none !important;
+    background: transparent !important;
+}
+
+/* --- ARQUITETURA DO BLOG --- */
+
+.blog-layout-container {
+    display: grid;
+    /* Garante: Conteúdo flexível | Sidebar fixa de 320px */
+    grid-template-columns: 1fr 320px; 
+    gap: 40px;
+    padding-top: 140px;
+    padding-bottom: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Sidebar (O Container/Trilho) */
+.blog-sidebar {
+    /* Removemos position: sticky daqui */
+    position: relative; 
+    top: auto;
+    
+    /* CRUCIAL: Removemos o height: fit-content */
+    height: auto; 
+    
+    min-width: 300px;
+    /* No Grid Layout, ao tirar o height fixo, ela estica automaticamente 
+       para ficar da mesma altura do conteúdo principal. */
+}
+
+/* =========================================
+   STICKY SIDEBAR (ELITE FIX)
+   ========================================= */
+
+/* Transforma a Sidebar num container Flex Vertical */
+/* Isso garante a altura correta e organiza os widgets */
+.blog-sidebar {
+    display: flex !important;
+    flex-direction: column;
+    height: 100%; /* Força a ocupar toda a altura da grade */
+}
+
+/* Garante que os widgets ocupem a largura total */
+.blog-sidebar > div {
+    width: 100%;
+}
+
+/* Configuração do Elemento que Gruda (Sticky) */
+.sticky-offer {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px; /* Distância do topo */
+    z-index: 10;
+    margin-bottom: 30px;
+    
+    /* [Dica de Elite] Em containers Flex, isso impede que o elemento estique estranhamente */
+    align-self: flex-start; 
+}
+
+.blog-main-content {
+    min-width: 0; /* Impede estouro do grid */
+}
+
+/* --- CARD EM LISTA (Imagem Esq | Texto Dir) --- */
+.blog-card {
+    display: flex;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: transform 0.3s, border-color 0.3s;
+    /* [AJUSTE] Aumentei levemente para 260px para dar respiro ao texto */
+    height: 260px; 
+}
+
+.blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border-color: var(--primary);
+}
+
+.blog-card-link-img {
+    width: 38%; /* Aumentei um pouco a área da imagem para destaque */
+    height: 100%;
+    display: block;
+    flex-shrink: 0; /* Impede que a imagem seja esmagada */
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-card-img {
+    width: 100%;
+    /* Mantém a correção anterior da altura */
+    height: 100% !important; 
+    
+    /* Garante preenchimento sem distorcer */
+    object-fit: cover; 
+    
+    /* [NOVO] Trava o foco no centro absoluto da imagem (Horizontal e Vertical) */
+    object-position: center center; 
+    
+    transition: transform 0.5s;
+}
+
+.blog-card:hover .blog-card-img { transform: scale(1.05); }
+
+.blog-card-body { 
+    padding: 25px; 
+    width: 62%;
+    display: flex;
+    flex-direction: column;
+    /* O conteúdo vai se espalhar verticalmente */
+}
+
+.blog-card-cat { 
+    color: var(--primary); 
+    font-weight: 800; 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.blog-card h2 { 
+    font-size: 1.25rem; 
+    line-height: 1.3; 
+    margin-bottom: 10px; 
+    font-weight: 700;
+    color: var(--text-title);
+    
+    /* Trava o título em no máximo 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.blog-card h2 a { text-decoration: none; color: inherit; }
+.blog-card h2 a:hover { color: var(--primary); }
+
+.blog-card p { 
+    color: var(--text-muted); 
+    font-size: 0.95rem; 
+    line-height: 1.5;
+    margin-bottom: 15px;
+    
+    /* [CORREÇÃO INTELIGENTE] */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Mostra exatamente 3 linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Força os três pontinhos (...) */
+    
+    /* Garante que o texto ocupe o espaço disponível mas não empurre o botão */
+    flex-grow: 1; 
+}
+
+/* Se preferir "Só Título", descomente a linha abaixo: */
+/* .blog-card p { display: none; } */
+
+.read-link { 
+    color: var(--accent); 
+    font-weight: 700; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    margin-top: auto; /* Empurra o link para o final do card */
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.read-link:hover { text-decoration: underline; }
+
+/* --- ARTIGO ÚNICO (Estilo Editorial) --- */
+.article-header { margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+.article-header h1 { font-size: 2.5rem; line-height: 1.2; color: var(--text-title); margin-bottom: 10px; margin-top: 10px; }
+.article-meta { color: var(--text-muted); font-size: 0.9rem; }
+
+.article-hero-img { 
+    width: 100%; 
+    height: auto; /* Deixa a altura livre */
+    aspect-ratio: 3/2; /* Força a proporção exata da sua imagem (1200x800) */
+    object-fit: cover; 
+    border-radius: 12px; 
+    margin-bottom: 40px; 
+    
+    /* Opcional: Trava a altura máxima no PC para não ocupar a tela toda se for gigante */
+    max-height: 600px; 
+}
+
+.article-body { font-size: 1.15rem; line-height: 1.8; color: var(--text-main); }
+.article-body h2 { margin-top: 40px; margin-bottom: 20px; color: var(--text-title); font-size: 1.8rem; }
+.article-body h3 { margin-top: 30px; margin-bottom: 15px; color: var(--text-title); font-size: 1.4rem; }
+.article-body p { 
+    margin-bottom: 20px; 
+}
+
+/* Lista com Box Cinza (Ajustado) */
+.article-body ul { 
+    margin-top: 0;          /* Remove margem extra do topo */
+    margin-bottom: 30px;    /* Espaço depois da lista */
+    background: var(--bg-body); 
+    padding: 20px 30px;     /* Reduzi de 30px para 20px no topo/baixo */
+    border-radius: 12px;    /* Arredondamento mais suave */
+    border: 1px solid var(--border); /* Borda sutil para acabamento */
+}
+
+.article-body li { 
+    margin-bottom: 10px; 
+    margin-left: 15px; /* Garante que a bolinha (bullet) não fique colada na borda */
+}
+/* Remove margem do último item para não sobrar espaço no fundo do box */
+.article-body li:last-child {
+    margin-bottom: 0;
+}
+
+/* --- LISTAS NUMERADAS TIPO TIMELINE (ELITE UI v2) --- */
+
+/* Container da Lista */
+.article-body ol {
+    list-style: none;
+    counter-reset: article-step-counter;
+    padding: 0;
+    margin: 40px 0;
+}
+
+/* O Item da Lista (Texto) */
+.article-body ol li {
+    position: relative;
+    padding-left: 60px; /* Mais espaço para caber a bolinha e a linha */
+    padding-bottom: 30px; /* Espaço extra embaixo para a linha crescer */
+    color: var(--text-main);
+    line-height: 1.7;
+}
+
+/* Remove o espaço extra do último item */
+.article-body ol li:last-child {
+    padding-bottom: 0;
+}
+
+/* O Número (Bolinha Azul) */
+.article-body ol li::before {
+    content: counter(article-step-counter);
+    counter-increment: article-step-counter;
+    
+    position: absolute;
+    left: 0;
+    top: 0; /* Alinhado ao topo */
+    z-index: 2; /* Fica NA FRENTE da linha */
+    
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary);
+    color: white;
+    
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 0 0 4px var(--bg-card); /* Borda branca para separar da linha */
+}
+
+/* A Linha Conectora (Timeline) */
+.article-body ol li::after {
+    content: '';
+    position: absolute;
+    left: 15px; /* Centralizado com a bolinha (32px / 2 - 1px) */
+    top: 32px;  /* Começa logo abaixo da bolinha */
+    bottom: 0;  /* Vai até o final do item */
+    width: 2px; /* Espessura da linha */
+    background-color: #e2e8f0; /* Cor cinza suave (var(--border)) */
+    z-index: 1; /* Fica ATRÁS da bolinha */
+}
+
+/* Esconde a linha do último item (não conecta com nada) */
+.article-body ol li:last-child::after {
+    display: none;
+}
+
+/* Ajuste Dark Mode */
+body.dark-mode .article-body ol li::before {
+    box-shadow: 0 0 0 4px var(--bg-card); /* Mantém a borda da cor do fundo escuro */
+}
+body.dark-mode .article-body ol li::after {
+    background-color: var(--border); /* Linha mais escura no modo noturno */
+}
+
+/* --- FIM DO CÓDIGO COLADO --- */
+
+/* --- WIDGETS --- */
+.widget { background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 30px; }
+.widget-sales { text-align: center; border-top: 5px solid var(--accent); }
+.widget-sales img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
+.widget-price { font-size: 1.8rem; font-weight: 800; color: var(--text-title); margin: 10px 0; }
+.widget-btn { display: block; background: var(--primary); color: white; padding: 12px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; }
+.widget-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .blog-layout-container { grid-template-columns: 1fr; } /* 1 Coluna */
+    .blog-sidebar { order: 2; } /* Sidebar desce */
+    .blog-card { flex-direction: column; height: auto; } /* Card vira vertical */
+    .blog-card-link-img { width: 100%; height: 200px; }
+    .blog-card-body { width: 100%; }
+}
+
+/* --- PAGINAÇÃO (Novo Recurso) --- */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Espaço entre os botões */
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border); /* Separa visualmente da lista */
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Botões redondos */
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+/* Estado Hover (Passar o mouse) */
+.page-btn:hover:not(.active):not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--bg-body);
+}
+
+/* Estado Ativo (Página Atual) */
+.page-btn.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3); /* Sombra suave azul */
+    cursor: default; /* Remove o cursor de clique */
+}
+
+/* Botões de Seta (Anterior/Próximo) */
+.page-btn.prev, .page-btn.next {
+    width: auto; /* Largura automática para caber ícones ou texto */
+    padding: 0 15px;
+    border-radius: 8px; /* Borda um pouco mais quadrada */
+}
+
+/* Estado Desabilitado (Quando não tem mais páginas) */
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--bg-body);
+    border-color: var(--border);
+}
+
+/* Dark Mode (Ajustes específicos se necessário, mas as variáveis já cuidam de quase tudo) */
+body.dark-mode .page-btn:hover:not(.active):not(:disabled) {
+    background-color: #1e293b; /* Fundo levemente mais claro no dark */
+}
+
+/* Accordion */
+.showH{margin:1.7em 0;line-height:1.7em;border:1px solid var(--contentL,rgba(0,0,0,.08))
+;border-radius:5px;overflow:hidden;font-size:93%;box-sizing:border-box;box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.showH details.ac{margin:0;border:0;border-radius:0;border-bottom:1px solid var(--contentL,rgba(0,0,0,.15))}
+.showH details.ac:last-child{border-bottom:0}details.ac{--szsp:25px;position:relative;padding:0;margin:var(--szsp) 
+0;background:var(--contentB,#fffdfc);border:1px solid var(--contentL,rgba(0,0,0,.08))
+;border-radius:5px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06)}
+details.ac summary{font-weight:700;cursor:pointer;display:flex;align-items:center;position:relative;padding:calc(var(--szsp) * .45) calc(var(--szsp) * .6)
+;z-index:1;outline:0;list-style:none;-webkit-tap-highlight-color:transparent}
+details.ac summary::-webkit-details-marker{display:none}details.ac summary::before{content:'\203A';flex:0 0 var(--szsp)
+;display:flex;align-items:center;justify-content:center;padding:0 10px;font-weight:400;font-size:150%;color:inherit;position:relative;inset-inline-start:-5px;transition:transform .2s ease}
+details.ac[open] summary::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--linkC,#1a73e8);opacity:.1;z-index:-1}
+details.ac[open] summary{color:var(--linkC,#1a73e8);border-bottom:1px solid var(--contentL,rgba(0,0,0,.12))}details.ac:not(.alt)[open] 
+summary::before{transform:rotate(90deg);inset-inline-start:-5px;top:2px}details.ac.alt summary::before{content:'\002B';padding:0 2px}
+details.ac.alt[open] summary::before{content:'\2212'}details.ac>:not(summary){padding:calc(var(--szsp) * .8) var(--szsp);margin:0;opacity:.9;animation:fadeIn .2s ease-in-out}
+details.ac>:not(summary) p{margin:calc(var(--szsp) * .8) 0}details.ac>:not(summary)>:first-child{margin-top:0}details.ac>:not(summary)>:last-child{margin-bottom:0}
+.bX details.ac{box-shadow:var(--bs-1,0 2px 12px rgba(0,0,0,.12))}.bX .showH{box-shadow:var(--bs-1,0 2px 16px rgba(0,0,0,.10))}
+.bX .showH details.ac{box-shadow:none}.showH details.ac{box-shadow:0 1px 0 rgba(0,0,0,.06)}.is-dark details.ac{background:#2d3748}
+.dark .showH{box-shadow:0 4px 16px rgba(0,0,0,.25)}.is-dark .showH details.ac{border-bottom:1px solid rgba(255,255,255,.12)}
+.dark details.ac{box-shadow:0 2px 8px rgba(0,0,0,.20),0 4px 16px rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.08)}
+.dark details.ac[open] summary{border-bottom:1px solid rgba(255,255,255,.15)}
+.dark .bX details.ac{box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.dark .bX .showH{box-shadow:0 2px 16px rgba(0,0,0,.20)}@keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:.9;transform:translateY(0)}}[dir=rtl] 
+details.ac summary::before{inset-inline-start:auto;inset-inline-end:-5px}
+details.ac summary:focus{outline:2px solid var(--linkC,#1a73e8);outline-offset:-2px}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active)
+{details.ac summary{display:block}details.ac summary::before{float:left;margin-right:10px}}
+/* --- CORREÇÃO FINAL E DEFINITIVA DO WIDGET FAQ --- */
+/* 1. Remove o ícone global duplicado (+) do lado direito */
+details.ac summary::after {
+    content: none !important; 
+    display: none !important;
+}
+/* 2. Força o alinhamento à esquerda e remove centralização */
+details.ac summary {
+    justify-content: flex-start !important; /* Alinha tudo à esquerda */
+    text-align: left !important;
+    width: 100%;
+}
+/* 3. Ajuste fino no ícone da esquerda (>) do widget */
+details.ac summary::before {
+    margin-right: 15px !important; /* Mais espaço entre a seta e o texto */
+    font-size: 1.2rem !important; /* Tamanho da seta ajustado */
+}
+/* 4. Garante que a resposta fique legível e alinhada */
+details.ac > :not(summary) {
+    text-align: left;
+    line-height: 1.6;
+    padding-left: 45px !important; /* Indenta a resposta para alinhar com o título */
+}
+/* 5. Container ajustado para PC */
+.showH {
+    max-width: 100%;
+    margin: 30px 0;
+}
+
+/* --- CORREÇÕES ESPECÍFICAS DO DARK MODE (Blog & FAQ) --- */
+
+/* 1. Cards da Listagem e Widgets da Sidebar */
+body.dark-mode .blog-card,
+body.dark-mode .widget {
+    background-color: var(--bg-card); /* Usa o fundo cinza escuro (#1e293b) */
+    border-color: var(--border);      /* Borda mais discreta */
+    box-shadow: none;                 /* Remove sombras brancas estranhas */
+}
+
+/* 2. Títulos dentro dos Cards/Widgets */
+body.dark-mode .blog-card h2 a,
+body.dark-mode .widget h3,
+body.dark-mode .widget-price {
+    color: var(--text-title); /* Garante que o título fique branco */
+}
+
+/* 3. Correção do FAQ (Accordion) */
+body.dark-mode details.ac {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border) !important;
+    color: var(--text-main) !important;
+}
+
+body.dark-mode details.ac summary {
+    color: var(--text-title) !important; /* Pergunta em branco */
+    border-bottom-color: var(--border) !important;
+}
+
+body.dark-mode details.ac[open] summary {
+    color: var(--primary) !important; /* Destaque azul quando aberto */
+}
+
+/* --- BARRA DE PROGRESSO DE LEITURA (PREMIUM UX) --- */
+.progress-container {
+    width: 100%;
+    height: 4px; /* Espessura da barra */
+    background: transparent;
+    position: fixed; /* Fixa no topo da tela mesmo rolando */
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Garante que fique acima do menu e de tudo */
+}
+
+.progress-bar {
+    height: 4px;
+    background: var(--accent); /* Cor Laranja */
+    width: 0%; /* Começa em 0% e o JS vai aumentar */
+    transition: width 0.1s ease-out; /* Suavidade no movimento */
+    box-shadow: 0 0 10px rgba(249, 115, 22, 0.5); /* Um brilho sutil para destacar */
+}
+
+/* --- BOTÕES DE COMPARTILHAMENTO (VIRALIZAÇÃO) --- */
+.share-box {
+    margin: 40px 0 20px 0;
+    text-align: center;
+    border-top: 1px dashed var(--border);
+    padding-top: 30px;
+}
+
+.share-title {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px; /* Levemente arredondado */
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s, opacity 0.2s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    color: white;
+}
+
+/* Cores das Redes */
+.share-wa { background-color: #25D366; } /* WhatsApp Verde */
+.share-li { background-color: #0077b5; } /* LinkedIn Azul */
+.share-copy { background-color: var(--text-title); } /* Copiar Link (Cinza Escuro) */
+/* Cores das Redes (Adicionar ao final da lista existente) */
+.share-fb { background-color: #1877F2; } /* Facebook Azul */
+.share-x { background-color: #000000; } /* X (Twitter) Preto */
+
+/* =========================================
+   PACOTE DE POLIMENTO VISUAL (VIBE TECH)
+   ========================================= */
+
+/* 1. TEXTO GRADIENTE ANIMADO (Hero) */
+/* Aplica apenas no destaque do título principal */
+.hero h1 .highlight {
+    background: linear-gradient(90deg, var(--accent) 0%, #fb923c 50%, var(--accent) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Fallback */
+    animation: textShine 4s linear infinite;
+}
+
+/* 2. LEVITAÇÃO DA IMAGEM (Hero) */
+.hero img {
+    animation: floatHero 6s ease-in-out infinite;
+}
+
+/* 3. BOTÃO CTA COM "PULSO" (Magnético) */
+.btn-cta {
+    animation: pulseGlow 2s infinite;
+}
+
+/* --- DEFINIÇÃO DAS ANIMAÇÕES (KEYFRAMES) --- */
+
+/* Brilho correndo no texto */
+@keyframes textShine {
+    to { background-position: 200% center; }
+}
+
+/* Flutuação suave (Sobe e desce) */
+@keyframes floatHero {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); } /* Sobe 15px */
+    100% { transform: translateY(0px); }
+}
+
+/* Onda de energia no botão */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+
+/* --- CTA BOX PREMIUM (Versão Híbrida: Light & Dark) --- */
+.cta-box-premium {
+    /* Padrão (Light Mode) */
+    background: var(--bg-card); /* Fundo claro */
+    border: 2px solid var(--accent); /* Borda laranja forte */
+    color: var(--text-title); /* Texto escuro */
+    padding: 40px;
+    border-radius: 20px;
+    margin: 50px 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15); /* Sombra laranja suave */
+    text-align: center;
+}
+
+/* Ajuste para DARK MODE (Fundo Escuro) */
+body.dark-mode .cta-box-premium {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(255,255,255,0.1); /* Borda sutil */
+    color: white; /* Texto branco */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.cta-content { position: relative; z-index: 2; }
+
+/* Títulos */
+.cta-box-premium h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: inherit; /* Herda a cor do box (escuro ou claro) */
+}
+body.dark-mode .cta-box-premium h3 { color: white; }
+
+/* Lista de Recursos (Bolinhas com Check) */
+.cta-features {
+    list-style: none !important;
+    padding: 0;
+    margin: 25px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.cta-features li {
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 50px;
+    /* Cor do fundo das "pílulas" */
+    background: var(--bg-body); 
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+
+/* Ajuste das "pílulas" no Dark Mode */
+body.dark-mode .cta-features li {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: none;
+}
+
+.cta-features li i { color: #22c55e; /* Verde check mais vivo */ }
+
+/* Preço */
+.cta-price {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.cta-price .old {
+    text-decoration: line-through;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+body.dark-mode .cta-price .old { color: #94a3b8; }
+
+.cta-price .new {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary); /* Preço em Azul no Light Mode */
+}
+body.dark-mode .cta-price .new { color: white; } /* Branco no Dark Mode */
+
+/* Botão Pulsante */
+.btn-cta-pulse {
+    background-color: var(--accent);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+    animation: pulseOrange 2s infinite;
+}
+.btn-cta-pulse:hover {
+    transform: scale(1.05);
+    background-color: #ea580c;
+}
+
+/* Ícone de Fundo */
+.cta-bg-icon {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 10rem;
+    color: var(--accent); /* Ícone laranja no Light Mode */
+    opacity: 0.05;
+    transform: rotate(-15deg);
+    z-index: 1;
+}
+body.dark-mode .cta-bg-icon {
+    color: white; /* Ícone branco no Dark Mode */
+    opacity: 0.03;
+}
+
+@keyframes pulseOrange {
+    0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+
+/* --- RESPONSIVIDADE CRÍTICA (MOBILE) --- */
+@media (max-width: 768px) {
+    .cta-box-premium {
+        padding: 30px 20px; /* Menos padding lateral */
+        margin: 40px -20px; /* "Estoura" a margem do artigo para ocupar a tela toda */
+        border-radius: 0; /* Tira o arredondamento no mobile para parecer nativo */
+        border-left: none;
+        border-right: none;
+    }
+
+    /* Força a lista a ficar vertical no celular */
+    .cta-features {
+        flex-direction: column; /* Um item abaixo do outro */
+        gap: 12px;
+        align-items: stretch; /* Estica os itens */
+    }
+
+    .cta-features li {
+        justify-content: center; /* Centraliza o texto das pílulas */
+        width: 100%;
+    }
+    
+    /* Preço empilhado */
+    .cta-price { flex-direction: column; gap: 5px; }
+
+    /* Botão ocupa toda a largura */
+    .btn-cta-pulse { width: 100%; display: block; }
+}
+
+/* =========================================
+   CONTENT BOOSTER KIT (Elementos de Artigo)
+   ========================================= */
+
+/* 1. CITAÇÃO DE DESTAQUE (Blockquote) */
+.article-body blockquote {
+    background: var(--bg-body);
+    border-left: 5px solid var(--accent); /* Linha laranja */
+    margin: 30px 0;
+    padding: 20px 30px;
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-title);
+    position: relative;
+}
+/* Aspas decorativas */
+.article-body blockquote::before {
+    content: '\201C'; /* Aspas gigantes */
+    font-size: 4rem;
+    color: var(--accent);
+    opacity: 0.2;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-family: serif;
+}
+
+/* 2. CAIXAS DE ALERTA (Dicas e Avisos) */
+.alert-box {
+    padding: 20px;
+    border-radius: 12px;
+    margin: 30px 0;
+    display: flex;
+    gap: 15px;
+    align-items: start;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.alert-info {
+    background: #eff6ff; /* Azul bem claro */
+    border: 1px solid #bfdbfe;
+    color: #1e3a8a;
+}
+.alert-info i { color: var(--primary); font-size: 1.2rem; margin-top: 3px; }
+
+.alert-warning {
+    background: #fff7ed; /* Laranja bem claro */
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+}
+.alert-warning i { color: var(--accent); font-size: 1.2rem; margin-top: 3px; }
+
+/* 3. VÍDEO RESPONSIVO (YouTube Wrapper) */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 40px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* --- 4. TABELAS RESPONSIVAS (COM DICA VISUAL MOBILE) --- */
+.table-wrapper {
+    overflow-x: auto; /* Permite rolar horizontalmente */
+    margin: 40px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background: var(--bg-card);
+    position: relative; /* Necessário para posicionar elementos */
+}
+
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Força a tabela a ser larga, ativando a rolagem no mobile */
+}
+
+.article-table th, .article-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap; /* Impede que o texto quebre, mantendo a tabela alinhada */
+}
+
+.article-table th {
+    background: var(--bg-body);
+    color: var(--primary);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.article-table tr:last-child td { border-bottom: none; }
+.article-table tr:hover { background: var(--bg-body); }
+
+/* CUSTOM SCROLLBAR (Para ficar elegante e visível) */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px; /* Altura da barra horizontal */
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-body); 
+    border-radius: 0 0 12px 12px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* Cor da barra (cinza visível) */
+    border-radius: 4px;
+    border: 2px solid var(--bg-body); /* Cria um respiro ao redor da barra */
+}
+
+/* --- TRUQUE DE ELITE: AVISO AUTOMÁTICO NO MOBILE --- */
+@media (max-width: 768px) {
+    /* Cria um aviso acima da tabela automaticamente via CSS */
+    .table-wrapper::before {
+        content: '← Arraste para ver a tabela →';
+        display: block;
+        padding: 8px 15px;
+        font-size: 0.75rem;
+        color: var(--accent); /* Laranja para chamar atenção */
+        background: var(--bg-body);
+        font-weight: 700;
+        text-align: right;
+        border-bottom: 1px dashed var(--border);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* --- WIDGET ÚLTIMOS ARTIGOS (SIDEBAR PREMIUM) --- */
+
+.sidebar-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espaço bem pequeno entre os itens */
+}
+
+.sidebar-post-item {
+    display: flex;
+    align-items: center; /* Alinha o centro do texto com o centro do círculo */
+    gap: 12px; /* Espaço compacto entre círculo e texto */
+    padding: 10px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    border-bottom: 1px dashed var(--border);
+}
+
+/* Remove a borda do último item */
+.sidebar-post-item:last-child {
+    border-bottom: none;
+}
+
+/* Efeito Hover Premium */
+.sidebar-post-item:hover {
+    background: var(--bg-body); /* Cor de fundo sutil (cinza claro no light, escuro no dark) */
+    transform: translateX(5px);
+    border-bottom-color: transparent; /* Esconde a linha pontilhada no hover */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.sidebar-thumb {
+    width: 60px;
+    height: 60px;
+    
+    /* --- TRAVA DE SEGURANÇA (NOVO) --- */
+    min-width: 60px;  /* Impede fisicamente de ficar menor que 60px */
+    min-height: 60px; /* Impede fisicamente de ficar menor que 60px */
+    /* -------------------------------- */
+    
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--bg-card);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar-content h4 {
+    font-size: 0.9rem; /* Fonte ligeiramente menor para ser compacto */
+    line-height: 1.3;
+    margin: 0 0 3px 0; /* Margem mínima abaixo do título */
+    font-weight: 700;
+}
+
+.sidebar-content h4 a {
+    text-decoration: none;
+    color: var(--text-title);
+    transition: color 0.2s;
+    /* Limita o título a 2 linhas para não quebrar o layout compacto */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sidebar-content h4 a:hover {
+    color: var(--primary);
+}
+
+.sidebar-date {
+    font-size: 0.7rem; /* Data bem pequena e discreta */
+    color: var(--text-muted);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sidebar-date i { color: var(--accent); opacity: 0.7; }
+
+/* --- SEÇÃO DE SCREENSHOTS (TABS) --- */
+.screenshots-section { padding: 80px 0; background: var(--bg-body); }
+
+/* Navegação (Botões) */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 2px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Área de Conteúdo */
+.tabs-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+    position: relative;
+    min-height: 300px; /* Evita pulo de layout */
+}
+
+/* Painéis (Imagens) */
+.tab-pane {
+    display: none; /* Escondido por padrão */
+    text-align: center;
+    animation: fadeInTab 0.5s ease-out;
+}
+
+.tab-pane.active {
+    display: block; /* Mostra se tiver a classe active */
+}
+
+.tab-pane img {
+    width: 100%;       /* Ocupa a largura disponível */
+    height: auto;      /* Mantém a proporção original (sem distorcer) */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: block;    /* Remove espaços fantasmas */
+}
+
+.tab-caption {
+    margin-top: 15px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dark Mode Ajuste */
+body.dark-mode .tab-btn { color: var(--text-main); border-color: var(--border); }
+body.dark-mode .tab-btn.active { color: white; border-color: var(--primary); }
+
+/* --- SEÇÃO DE DEPOIMENTOS --- */
+.testimonials-section { padding: 80px 0; background: var(--bg-card); border-bottom: 1px solid var(--border); }
+
+/* Grid Responsivo com Scroll Snap */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 colunas no PC */
+    gap: 30px;
+    padding-bottom: 20px; /* Espaço para a barra de rolagem no mobile */
+}
+
+/* Card de Depoimento */
+.testimonial-card {
+    background: var(--bg-body);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.test-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.test-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Avatar de Letra (Fallback) */
+.test-avatar-letter {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.test-name { font-size: 1rem; color: var(--text-title); margin: 0; }
+.test-role { font-size: 0.8rem; color: var(--text-muted); }
+
+.test-text {
+    font-style: italic;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.test-stars { color: #fbbf24; font-size: 1.2rem; letter-spacing: 2px; }
+
+/* COMPORTAMENTO CARROSSEL NO MOBILE */
+@media (max-width: 900px) {
+    .testimonials-grid {
+        display: flex; /* Vira linha única */
+        overflow-x: auto; /* Permite rolar para o lado */
+        scroll-snap-type: x mandatory; /* Efeito magnético */
+        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
+    }
+
+    .testimonial-card {
+        min-width: 85%; /* Card ocupa quase a tela toda */
+        scroll-snap-align: center; /* Centraliza ao parar */
+    }
+}
+
+/* --- SEÇÃO BLOG NA HOME --- */
+.blog-home-section {
+    padding: 80px 0;
+    background-color: var(--bg-body); /* Contraste com a seção anterior */
+    border-bottom: 1px solid var(--border);
+}
+
+.btn-link-arrow {
+    color: var(--text-title);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+    transition: all 0.2s;
+}
+
+.btn-link-arrow:hover {
+    color: var(--accent);
+    border-bottom-color: transparent;
+}
+
+/* Efeito de Zoom na imagem do card */
+.feature-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Ajuste para centralizar cards na Home */
+#home-blog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Força os cards a caberem na linha */
+#home-blog-container .feature-card {
+    /* Base: 300px (menor que 350px para caber 3). Cresce (1) para preencher. */
+    flex: 1 1 300px; 
+    
+    width: 100%;
+    max-width: 380px; /* Limite individual para não ficarem gigantes em telas 4k */
+    min-width: 280px; /* Impede que fiquem muito espremidos antes de quebrar */
+}
+
+
+
+
+/* --- SISTEMA DE MÍDIA DO HERO (HÍBRIDO V2) --- */
+
+/* Container Mestre (Padrão para Imagem) */
+.hero-media-box {
+    margin-top: 50px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    background: var(--bg-card);
+    position: relative;
+    
+    /* Animação padrão (apenas para imagem) */
+    animation: floatHero 6s ease-in-out infinite;
+}
+
+/* Modificador: MODO VÍDEO (Estático e Seguro) */
+.hero-media-box.video-mode {
+    animation: none; /* Desliga a flutuação */
+    max-width: 900px; /* Trava a largura para não ficar gigante */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ajuste da Imagem */
+.hero-media-box img {
+    width: 100%;
+    display: block;
+    animation: none !important; 
+    border: none !important;
+}
+
+/* Wrapper Proporcional para Vídeo (16:9) */
+.video-wrapper-hero {
+    position: relative;
+    padding-bottom: 56.25%; /* Mantém proporção 16:9 sempre */
+    height: 0;
+    width: 100%;
+    background: black; /* Fundo preto para evitar clarão */
+}
+
+/* Vídeo Local e YouTube */
+.video-wrapper-hero iframe,
+.video-wrapper-hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
+/* --- PLAYER DE VÍDEO CUSTOMIZADO (ELITE UI) --- */
+
+/* Ajuste do container para permitir posicionamento absoluto */
+.custom-player .video-wrapper-hero {
+    cursor: pointer; /* Mãozinha para indicar clique */
+}
+
+/* Camada de Sobreposição (Capa + Botão) */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Fica acima do vídeo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    transition: opacity 0.3s ease;
+}
+
+/* Quando o vídeo toca, a capa some */
+.video-overlay.hidden {
+    opacity: 0;
+    pointer-events: none; /* Deixa clicar no vídeo embaixo */
+}
+
+/* A Imagem de Capa (Poster) */
+.video-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8; /* Levemente escurecida para destacar o botão */
+    transition: opacity 0.3s;
+}
+
+.video-overlay:hover .video-poster {
+    opacity: 0.6; /* Escurece mais no hover (foco no play) */
+}
+
+/* O Botão de Play Gigante */
+.btn-play-big {
+    position: absolute;
+    z-index: 3;
+    width: 80px;
+    height: 80px;
+    background: rgba(24, 121, 232, 0.9); /* Azul Júpiter */
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px; /* Ajuste óptico do ícone play */
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(24, 121, 232, 0.7);
+    transition: transform 0.2s, background 0.2s;
+    animation: pulsePlay 2s infinite;
+}
+
+.video-overlay:hover .btn-play-big {
+    transform: scale(1.1);
+    background: #fff;
+    color: var(--primary);
+}
+
+@keyframes pulsePlay {
+    0% { box-shadow: 0 0 0 0 rgba(24, 121, 232, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(24, 121, 232, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(24, 121, 232, 0); }
+}
+
+/* =========================================
+   ALERTAS PERSONALIZADOS (JÚPITER UI)
+   ========================================= */
+
+.alert {
+    --szsp: 20px;
+    /* Define cor padrão se não especificada */
+    --clr: var(--primary); 
+    position: relative;
+    border-radius: 8px;
+    margin: 25px 0;
+    padding: calc(var(--szsp) * .8) var(--szsp); /* Ajustei padding */
+    font-size: 0.95rem; /* Ajuste para leitura melhor */
+    line-height: 1.6;
+    overflow: hidden;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid transparent; /* Prepara para borda */
+}
+
+/* Fundo colorido translúcido */
+.alert:not(.outline)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--clr);
+    z-index: -1;
+    opacity: 0.1; /* Fundo suave */
+}
+
+/* Estilo Outline (Borda apenas) */
+.alert.outline {
+    border: 1px solid var(--clr);
+    color: var(--clr);
+    background: transparent;
+}
+
+/* Configuração dos Ícones SVG */
+.alert.info, .alert.warning, .alert.success, .alert.error {
+    background-repeat: no-repeat;
+    background-size: 24px; /* Tamanho fixo do ícone */
+    background-position: 20px 20px; /* Posição do ícone */
+    padding-left: 60px; /* Espaço para o texto não ficar em cima do ícone */
+    color: var(--text-main); /* Cor do texto base */
+}
+
+/* Títulos dentro do Alerta */
+.alert > strong:first-child,
+.alert > b:first-child {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: var(--clr); /* Título na cor do alerta */
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Ícones SVG (Data URI) */
+.alert.info { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z' fill='%2300a7e6'/%3E%3C/svg%3E"); }
+.alert.warning { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z' fill='%23ecb621'/%3E%3C/svg%3E"); }
+.alert.success { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z' fill='%2341ba79'/%3E%3C/svg%3E"); }
+.alert.error { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 0c53 0 96 43 96 96v3.6c0 15.7-12.7 28.4-28.4 28.4H188.4c-15.7 0-28.4-12.7-28.4-28.4V96c0-53 43-96 96-96zM41.4 105.4c12.5-12.5 32.8-12.5 45.3 0l64 64c.7 .7 1.3 1.4 1.9 2.1c14.2-7.3 30.4-11.4 47.5-11.4H312c17.1 0 33.2 4.1 47.5 11.4c.6-.7 1.2-1.4 1.9-2.1l64-64c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-64 64c-.7 .7-1.4 1.3-2.1 1.9c6.2 12 10.1 25.3 11.1 39.5H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H416c0 24.6-5.5 47.8-15.4 68.6c2.2 1.3 4.2 2.9 6 4.8l64 64c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-63.1-63.1c-24.5 21.8-55.8 36.2-90.3 39.6V240c0-8.8-7.2-16-16-16s-16 7.2-16 16V479.2c-34.5-3.4-65.8-17.8-90.3-39.6L86.6 502.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l64-64c1.9-1.9 3.9-3.4 6-4.8C101.5 367.8 96 344.6 96 320H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96.3c1.1-14.1 5-27.5 11.1-39.5c-.7-.6-1.4-1.2-2.1-1.9l-64-64c-12.5-12.5-12.5-32.8 0-45.3z' fill='%23ff6372'/%3E%3C/svg%3E"); }
+
+/* --- CORES (MODO CLARO) --- */
+.alert.info { --clr: #3e69a8; }
+.alert.warning { --clr: #8f6919; }
+.alert.success { --clr: #127a5b; }
+.alert.error { --clr: #be2e3c; }
+
+/* --- CORES (MODO ESCURO - DARK MODE) --- */
+/* Aqui fazemos a mágica acontecer para o Júpiter */
+body.dark-mode .alert.info { --clr: #00a7e6; }
+body.dark-mode .alert.warning { --clr: #ecb621; }
+body.dark-mode .alert.success { --clr: #41ba79; }
+body.dark-mode .alert.error { --clr: #ff6372; }
+
+/* Ajuste de contraste do texto no Dark Mode */
+body.dark-mode .alert {
+    color: #e2e8f0; /* Texto claro genérico */
+}
+
+/* --- LEAD MAGNET BOX (Box de Captura no Artigo) --- */
+.lead-box-pro {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    border: 2px dashed var(--primary); /* Borda tracejada azul chama atenção */
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Modo Escuro */
+body.dark-mode .lead-box-pro {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: var(--primary);
+}
+
+.lead-box-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+    animation: floatIcon 3s infinite ease-in-out;
+}
+
+.lead-box-title {
+    color: var(--text-title);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.lead-box-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ajuste do formulário dentro do box */
+.lead-box-pro .footer-form {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.lead-box-pro input {
+    background: var(--bg-body); /* Contraste */
+}
+
+/* --- CUSTOM SCROLLBAR PARA TABELAS --- */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px; /* Altura da barra horizontal */
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-body); 
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* Cor da barra (cinza suave) */
+    border-radius: 4px;
+}
+
+/* Quando passa o mouse, fica da cor da marca */
+.table-wrapper:hover::-webkit-scrollbar-thumb {
+    background-color: var(--primary); 
+}
+
+/* --- CORREÇÃO DO BOTÃO 'COPIAR LINK' NO DARK MODE --- */
+body.dark-mode .share-copy {
+    background-color: #ffffff; /* Fundo branco para destacar no escuro */
+    color: #1e293b;            /* Texto escuro para leitura fácil */
+    border: 1px solid #e2e8f0; /* Borda sutil */
+}
+
+body.dark-mode .share-copy:hover {
+    background-color: #f1f5f9; /* Cinza claro no hover */
+    color: var(--primary);     /* Texto fica azul no hover */
+    transform: translateY(-2px);
+}
+
+/* --- ESTILO DA LOGO --- */
+.brand-logo-full {
+    display: flex;
+    align-items: center; 
+    gap: 10px;           
+    text-decoration: none;
+}
+
+/* O Ícone de Imagem (Tamanho Forçado) */
+.brand-icon-img {
+    height: 38px !important; /* Força o tamanho menor */
+    width: auto;
+    margin-top: -2px;        /* Ajuste de alinhamento vertical */
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    flex-shrink: 0;
+}
+
+.brand-text-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1;     /* Mantém o título e subtítulo próximos */
+}
+
+.brand-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem; /* AUMENTE OU DIMINUA TITULO DA LOGO (ex: 1.6rem ou 22px) */
+    color: var(--primary); /* Azul */
+    letter-spacing: -0.5px;
+    margin-bottom: 2px;
+}
+
+.brand-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem; /* AUMENTE OU DIMINUA SUBTITULO DA LOGO (ex: 0.8rem ou 12px) */
+    color: var(--accent); /* Laranja */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- AJUSTE PARA CELULAR (MOBILE) --- */
+@media (max-width: 480px) {
+    .brand-icon-img {
+        height: 35px; /* Diminui um pouco no celular para não quebrar */
+    }
+    .brand-title {
+        font-size: 1.1rem; /* TAMANHO DO TITULO LOGO NO CELULAR */
+    }
+    .brand-subtitle {
+        font-size: 0.6rem; /* TAMANHO DO SUBTITULO NO CELULAR */
+    }
+    .brand-logo-full {
+        gap: 8px;
+    }
+}
+
+/* --- MODO ESCURO --- */
+body.dark-mode .brand-title {
+    color: var(--text-title); /* Fica branco no modo escuro */
+}
+
+/* --- AJUSTE DA LOGO ESPECÍFICO PARA O RODAPÉ --- */
+.footer-brand-ajuste {
+    margin-bottom: 20px; /* Empurra o texto de descrição para baixo */
+    display: inline-flex; /* Garante que fique alinhado à esquerda */
+}
+
+/* Opcional: Se quiser a logo do rodapé levemente menor que a do topo */
+.footer-brand-ajuste .brand-icon-img {
+    height: 35px !important; /* Um pouco mais discreto no rodapé */
+}

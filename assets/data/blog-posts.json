@@ -1,0 +1,53 @@
+[
+{
+  "id": "como-precificar-servicos-produtos",
+  "title": "Precificação: Como Calcular seu Preço de Venda sem Tomar Prejuízo",
+  "date": "07 Dez 2025",
+  "author": "Equipe Rec Vendas",
+  "category": "Finanças",
+  "image": "assets/img/posts/precificacao-capa.webp",
+  "summary": "Pare de chutar preços. Aprenda a diferença entre lucro e faturamento e veja como o sistema garante que você não pague para trabalhar.",
+  "contentUrl": "assets/posts/como-precificar-servicos-produtos.html"
+},
+{
+  "id": "excel-vs-sistema-gestao",
+  "title": "Planilha vs. Sistema de Gestão: O Que Realmente Vale a Pena?",
+  "date": "07 Dez 2025",
+  "author": "Equipe Rec Vendas",
+  "category": "Produtividade",
+  "image": "assets/img/posts/excel-vs-sistema.webp",
+  "summary": "Descubra os custos ocultos de gerenciar sua empresa no Excel e veja por que migrar para um sistema pode dobrar sua produtividade.",
+  "contentUrl": "assets/posts/excel-vs-sistema.html"
+},
+{
+  "id": "gestao-hibrida-loja-servicos",
+  "title": "Loja ou Serviços? Como Gerenciar Tudo em Um Só Lugar (Sem Mensalidade)",
+  "date": "07 Dez 2025",
+  "author": "Equipe Rec Vendas",
+  "category": "Empreendedorismo",
+  "image": "assets/img/posts/gestao-hibrida-capa.webp",
+  "summary": "Descubra como o sistema híbrido ajuda lojistas, freelancers e autônomos a profissionalizar orçamentos, estoque e vendas sem custos mensais.",
+  "contentUrl": "assets/posts/gestao-hibrida-loja-servicos.html"
+},
+{
+  "id": "rec-vendas-5-hub-servicos",
+  "title": "Rec Vendas 5.0: O Sistema Híbrido que Revoluciona Assistências",
+  "date": "06 Dez 2025",
+  "author": "Wallace Fernandes",
+  "category": "Lançamento",
+  "image": "assets/img/posts/rec-vendas-5-cover.webp",
+  "summary": "Conheça o novo fluxo vertical de O.S., contratos automáticos e como a gestão híbrida pode dobrar a produtividade da sua assistência técnica.",
+  "contentUrl": "assets/posts/rec-vendas-5-hub.html"
+},
+ 
+  {
+    "id": "gestao-os-assistencia",
+    "title": "Gestão de O.S. e Estoque: Como a Desorganização Quebra Assistências Técnicas",
+    "date": "06 Dez 2025",
+    "author": "Wallace Fernandes",
+    "category": "Gestão de Negócios",
+    "image": "assets/img/posts/gestao-os.webp", 
+    "summary": "Descubra como a falta de controle de O.S. e estoque cria um rombo financeiro na sua assistência técnica. Aprenda a usar um sistema híbrido offline para ter lucro real.",
+    "contentUrl": "assets/posts/gestao-os-assistencia.html"
+  }
+]
