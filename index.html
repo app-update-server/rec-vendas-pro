@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 
-    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=2.1">
     
     <link rel="preload" as="image" href="assets/img/hero-img.webp" fetchpriority="high">
     
@@ -131,14 +131,14 @@
             <div class="hero-media-box" style="display:none;">
                 <img 
                     src="assets/img/hero-img.webp" 
-                    alt="Interface do Software Júpiter Smart Lite - Controle Financeiro Windows" 
+                    alt="Interface do Rec Vendas Pro - Hub de Gestão Híbrido" 
                     width="1280" 
                     height="720" 
                     fetchpriority="high">
             </div>
             
 			<!-- VÍDEO YOUTUBE (Adicione style="display:none" na imagem para ativar este) -->
-            <div class="hero-media-box reveal video-mode">
+            <div class="hero-media-box reveal video-mode" style="display:none;">
                 <div class="video-wrapper-hero">
                     <iframe src="https://www.youtube.com/embed/NDwFo16HwUs?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1" 
                             title="Vídeo de Apresentação Rec Vendas" 
@@ -149,18 +149,21 @@
             </div>
 			
             <!-- VÍDEO LOCAL (Adicione style="display:none" na imagem para ativar este) -->
-            <div class="hero-media-box reveal video-mode custom-player" style="display:none;">
+            <div class="hero-media-box reveal video-mode custom-player">
                 <div class="video-wrapper-hero">
+                    
                     <video id="heroVideo" width="100%" height="100%" playsinline preload="none">
                         <source src="assets/video/video.mp4" type="video/mp4">
                         Seu navegador não suporta a tag de vídeo.
                     </video>
+
                     <div class="video-overlay" id="videoOverlay">
                         <img src="assets/video/capa-video.webp" alt="Assistir Demonstração" class="video-poster">
                         <button class="btn-play-big" aria-label="Reproduzir Vídeo">
                             <i class="fas fa-play" style="margin-left: 5px;"></i>
                         </button>
                     </div>
+
                 </div>
             </div>
         </div>
