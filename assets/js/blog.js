@@ -46,36 +46,43 @@ window.shareSocial = function(network, title, url) {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // --- CONFIGURAÇÕES ---
-    const ITEMS_PER_PAGE = 6; // Quantos posts por página
-    let currentPage = 1;      // Página inicial padrão
+    // --- CONFIGURAÇÕES DE ELITE ---
+    const ITEMS_PER_PAGE = 6; 
+    let currentPage = 1;      
+
+    // [SEGREDINHO DO CACHE]
+    // Mude este número sempre que adicionar um artigo novo!
+    // Ex: '1.1', '1.2', '2.0'...
+    const CONTENT_VERSION = '1.0'; 
 
     // Elementos do DOM
-    const listContainer = document.getElementById('list-render-area'); // Área da lista
-    const paginationContainer = document.getElementById('pagination-area'); // Área dos botões
-    const postContainer = document.getElementById('post-render-area'); // Área do post único
-    const sidebarContainer = document.getElementById('sidebar-render-area'); // Sidebar
+    const listContainer = document.getElementById('list-render-area'); 
+    const paginationContainer = document.getElementById('pagination-area'); 
+    const postContainer = document.getElementById('post-render-area'); 
+    const sidebarContainer = document.getElementById('sidebar-render-area'); 
 
     try {
-        // 1. CARREGAMENTO DOS DADOS (O "Cardápio")
-        const response = await fetch('assets/data/blog-posts.json');
+        // 1. CARREGAMENTO DOS DADOS (Com Cache Busting)
+        // O '?v=' obriga o navegador a baixar o JSON novo se a versão mudar
+        const response = await fetch(`assets/data/blog-posts.json?v=${CONTENT_VERSION}`);
         const posts = await response.json();
 
-        // --- RENDERIZAÇÃO DA SIDEBAR (Comum a todas as telas) ---
+        // --- RENDERIZAÇÃO DA SIDEBAR ---
         if (sidebarContainer) {
             renderSidebar(posts);
         }
 
         // --- ROTEAMENTO INTELIGENTE ---
         
-        // CENÁRIO A: Estamos na Home do Blog (Lista)
+        // CENÁRIO A: Home do Blog
         if (listContainer && paginationContainer) {
             loadPageData(posts, currentPage);
         }
 
-        // CENÁRIO B: Estamos lendo um Artigo (Single Post)
+        // CENÁRIO B: Lendo um Artigo
         if (postContainer) {
-            await renderSinglePost(posts); // Agora é assíncrono para buscar arquivos externos
+            // Passamos a versão também para carregar o texto do artigo atualizado
+            await renderSinglePost(posts, CONTENT_VERSION); 
         }
 
     } catch (e) {
@@ -202,22 +209,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
     }
 
-    // 5. Renderiza Post Único (CORRIGIDO PARA REC VENDAS)
-    async function renderSinglePost(posts) {
+    // 5. Renderiza Post Único (COM CONTROLE DE VERSÃO)
+    async function renderSinglePost(posts, version) {
         const postContainer = document.getElementById('post-render-area');
         const params = new URLSearchParams(window.location.search);
         const postId = params.get('id');
         const post = posts.find(p => p.id === postId);
 
         if (post) {
-            document.title = `${post.title} - Blog Rec Vendas`; // Título da Aba Corrigido
+            document.title = `${post.title} - Blog Rec Vendas`; 
 
             let finalContent = "";
 
-            // Lógica de Carregamento
+            // Lógica de Carregamento com Cache Busting
             if (post.contentUrl) {
                 try {
-                    const contentResponse = await fetch(post.contentUrl);
+                    // Adicionei o ?v=${version} aqui também!
+                    const contentResponse = await fetch(`${post.contentUrl}?v=${version}`);
                     if (contentResponse.ok) {
                         finalContent = await contentResponse.text();
                     } else {
