@@ -49,6 +49,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     background-color: var(--bg-body);
+    overflow-x: hidden; /* Impede que o site role para os lados */
 }
 
 img {
@@ -2283,4 +2284,5 @@ body.dark-mode .brand-title {
 /* Opcional: Se quiser a logo do rodapé levemente menor que a do topo */
 .footer-brand-ajuste .brand-icon-img {
     height: 35px !important; /* Um pouco mais discreto no rodapé */
+
 }
