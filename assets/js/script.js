@@ -180,7 +180,7 @@ document.addEventListener('submit', function(e) {
         e.preventDefault(); // PARE O ENVIO PADRÃO IMEDIATAMENTE
         
         const form = e.target;
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwe-qiCzQLCRUlfOkDBwTkUY35tfkmYygrQW5P7_9-dg62g1AZljiyzGBti9slxsdlQfQ/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzWmJ3RVjHVrXzNHQn_pAs9QjZCnAlVMyU2L4G0fqffViEW6oyE7Cn96F2Pd3RPGTnoXA/exec';
         
         // Elementos visuais (Busca dentro do container do formulário atual)
         const btn = form.querySelector('button');
@@ -259,4 +259,5 @@ document.addEventListener("DOMContentLoaded", function() {
              setTimeout(() => { overlay.style.opacity = '1'; }, 10);
         });
     }
+
 });
